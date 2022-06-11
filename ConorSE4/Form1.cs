@@ -21,8 +21,12 @@ namespace ConorSE4
         Bitmap myBitmap;
 
         private bool button1WasClicked = false;
+        /// <summary>
+        /// Form1 constructor that creates a new bitmap and initializes component
+        /// </summary>
         public Form1()
         {
+
             myBitmap = new Bitmap(640, 480);
             InitializeComponent();
 
@@ -32,7 +36,28 @@ namespace ConorSE4
         {
             mouseDown = true; //flag mouse button down
         }
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        private void displayOfAction_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics; //get graphics context of form (which is being displayed)
+            g.DrawImageUnscaled(myBitmap, 0, 0); 
+        }
+        
+        /// <summary>
+        /// method when mouse is moved creates a pen object and draws line depending where the mouse is moved to
+        /// </summary>
+    
+        //private void Form1_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (mouseDown == false)
+        //        return; //mouse not down so nothing to do
+        //    Graphics g = Graphics.FromImage(myBitmap); //get graphics contex of off screen bitmap
+        //    Pen p = new Pen(Color.Red, 2);
+        //    g.DrawLine(p, e.X, e.Y, e.X + 1, e.Y + 1); //draw a point on off screen bitmap
+        //    p.Dispose();
+        //    Refresh(); //signify that something has been draw and windowing system should update the display
+        //}
+
+        private void displayOfAction_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown == false)
                 return; //mouse not down so nothing to do
@@ -40,8 +65,17 @@ namespace ConorSE4
             Pen p = new Pen(Color.Red, 2);
             g.DrawLine(p, e.X, e.Y, e.X + 1, e.Y + 1); //draw a point on off screen bitmap
             p.Dispose();
-            Refresh(); //signify that something has been draw and windowing system should update the display
+            Refresh(); //signify that
         }
+        private void displayOfAction_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false; //flag mouse button up
+        }
+        private void displayOfAction_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true; //flag mouse button down
+        }
+
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -75,6 +109,10 @@ namespace ConorSE4
 
         }
 
+        /// <summary>
+        /// Gets the user input entered into the textbox
+        /// </summary>
+        /// <returns>returns the var value of the user input</returns>
         public String GetTextFromTextBox()
         {
 
@@ -90,6 +128,10 @@ namespace ConorSE4
 
         }
 
+        /// <summary>
+        /// Run button click method that adds to the user command binding source that can then display the command history
+        /// </summary>
+  
         private void runButton_Click(object sender, EventArgs e)
         {
             GetTextFromTextBox();
@@ -127,6 +169,25 @@ namespace ConorSE4
         }
 
 
+        public String [] getCommand()
+        {
+         String userEnteredText = GetTextFromTextBox();
+            string wordCommand;
+            string numbersCommand = (" ");
+
+
+            wordCommand = GetTextFromTextBox();
+            numbersCommand = wordCommand;
+
+
+            string[] split = numbersCommand.Split(' ');
+            foreach (string item in split)
+            {
+               item.ToString();
+            }
+            return split;
+        }
+
         public void sendCommand()
         {
             if (button1WasClicked)
@@ -151,7 +212,8 @@ namespace ConorSE4
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-
+            //Graphics g = e.Graphics; //get graphics context of form (which is being displayed)
+            //g.DrawImageUnscaled(myBitmap, 0, 0); 
 
         }
 
@@ -165,6 +227,12 @@ namespace ConorSE4
         {
             validateSyntax();
         }
+     
+    
+        /// <summary>
+        /// method that is used by the syntax button to check if user input is valid syntax
+        /// </summary>
+        /// <returns>a boolean that determines if the syntax is valid</returns>
         public bool validateSyntax()
         {
             String[] allowedValues = { "drawTo", "rect", "circle" };
@@ -182,6 +250,13 @@ namespace ConorSE4
             return doesItContainValidSyntax;
 
         }
+
+        /// <summary>
+        /// A method to check if any of the values in the text boxt text are in the array of allowed values
+        /// </summary>
+        /// <param name="textBoxText">the text entered from the user</param>
+        /// <param name="allowedValues">an array list of the allowed values</param>
+        /// <returns>a boolean if it contains any</returns>
         public static bool ContainsAny(string textBoxText, params string[] allowedValues)
         {
             foreach (string allowed in allowedValues)
@@ -202,26 +277,37 @@ namespace ConorSE4
         {
 
         }
+        
+        /// <summary>
+        /// Paints the picture box and adds a rectangle on the screen ready to be moved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics; //get graphics context of form (which is being displayed)
+       
+            Graphics g = e.Graphics;
+        
             g.DrawImageUnscaled(myBitmap, 0, 0);
-            Pen myPen = new Pen(Color.Black);
-            Brush myBrush = new SolidBrush(Color.Red);
 
-            g.DrawRectangle(myPen, 100, 100, 25, 25);
-            String textBoxText = commandRunTextBox.Text;
-            if (textBoxText.Equals("clear"))
-            {
-                displayOfAction.Image.Dispose();
-            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            displayOfAction.Image = null;
+            ClearImage();
+        }
+        public void ClearImage()
+        {
+            Graphics g = Graphics.FromImage(myBitmap);
+            g.Clear(Color.Transparent);
         }
 
+
+        /// <summary>
+        /// Open file button that opens a file dialog allowing a user to open a new file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openFileButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
@@ -238,7 +324,12 @@ namespace ConorSE4
             }
           
         }
-
+       
+        /// <summary>
+        /// Empties the script box ready to create a new to be saved or imported
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void New_Click(object sender, EventArgs e)
         {
             label2.Text = "";

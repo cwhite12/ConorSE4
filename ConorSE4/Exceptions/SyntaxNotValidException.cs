@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace SE4FormApplication.Exceptions
 {
+
+    /// <summary>
+    /// An exception that is thrown if the syntax given is not valid
+    /// </summary>
     [Serializable]
     public class SyntaxNotValidException : Exception
 

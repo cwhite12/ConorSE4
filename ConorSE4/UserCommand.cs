@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 namespace ConorSE4
 
 {
+
+   /// <summary>
+   /// A user command class that validates whether the user input is valid and only contains alphabet letters or numbers
+   /// </summary>
    public class UserCommand : EntityValidator
     {
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only Alphabets and Numbers allowed.")]

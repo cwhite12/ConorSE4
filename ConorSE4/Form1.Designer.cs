@@ -67,14 +67,14 @@ namespace ConorSE4
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Monospac821 BT", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(434, 27);
-            this.label1.Name = "titleLabel";
+            this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(321, 35);
             this.label1.TabIndex = 0;
             this.label1.Text = "C WHITE SYNTAX GUI";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Click += new System.EventHandler(this.titleLabel_Click);
             // 
-            // textBox1
+            // commandRunTextBox
             // 
             this.commandRunTextBox.AcceptsReturn = true;
             this.commandRunTextBox.AcceptsTab = true;
@@ -147,12 +147,15 @@ namespace ConorSE4
             this.displayOfAction.TabIndex = 12;
             this.displayOfAction.TabStop = false;
             this.displayOfAction.Click += new System.EventHandler(this.displayOfAction_Click_1);
-            this.displayOfAction.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.displayOfAction.Paint += new System.Windows.Forms.PaintEventHandler(this.displayOfAction_Paint);
+            this.displayOfAction.MouseDown += new System.Windows.Forms.MouseEventHandler(this.displayOfAction_MouseDown);
+            this.displayOfAction.MouseMove += new System.Windows.Forms.MouseEventHandler(this.displayOfAction_MouseMove);
+            this.displayOfAction.MouseUp += new System.Windows.Forms.MouseEventHandler(this.displayOfAction_MouseUp);
             // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(858, 522);
-            this.button3.Name = "clearButton";
+            this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 13;
             this.button3.Text = "Clear ";
