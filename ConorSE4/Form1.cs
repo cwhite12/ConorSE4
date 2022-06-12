@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,13 +40,13 @@ namespace ConorSE4
         private void displayOfAction_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics; //get graphics context of form (which is being displayed)
-            g.DrawImageUnscaled(myBitmap, 0, 0); 
+            g.DrawImageUnscaled(myBitmap, 0, 0);
         }
-        
+
         /// <summary>
         /// method when mouse is moved creates a pen object and draws line depending where the mouse is moved to
         /// </summary>
-    
+
         //private void Form1_MouseMove(object sender, MouseEventArgs e)
         //{
         //    if (mouseDown == false)
@@ -60,12 +61,12 @@ namespace ConorSE4
         private void displayOfAction_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown == false)
-                return; //mouse not down so nothing to do
-            Graphics g = Graphics.FromImage(myBitmap); //get graphics contex of off screen bitmap
+                return;
+            Graphics g = Graphics.FromImage(myBitmap);
             Pen p = new Pen(Color.Red, 2);
-            g.DrawLine(p, e.X, e.Y, e.X + 1, e.Y + 1); //draw a point on off screen bitmap
+            g.DrawLine(p, e.X, e.Y, e.X + 1, e.Y + 1);
             p.Dispose();
-            Refresh(); //signify that
+            Refresh();
         }
         private void displayOfAction_MouseUp(object sender, MouseEventArgs e)
         {
@@ -102,8 +103,9 @@ namespace ConorSE4
 
 
         }
-        public void checkSyntax()
+        public void checkSyntax(String text)
         {
+
             var = commandRunTextBox.Text;
 
 
@@ -131,7 +133,7 @@ namespace ConorSE4
         /// <summary>
         /// Run button click method that adds to the user command binding source that can then display the command history
         /// </summary>
-  
+
         private void runButton_Click(object sender, EventArgs e)
         {
             GetTextFromTextBox();
@@ -166,8 +168,26 @@ namespace ConorSE4
                 new Circle(Color.Black, 123, 123, 123);
 
             }
+            if (GetTextFromTextBox().Contains("drawTo")) {
+
+                draw();
+                
+    
+            }
+
+
         }
 
+        public void draw() {
+            MouseEventArgs e;
+            String text = GetTextFromTextBox();
+            int numbers = Int32.Parse(text);
+            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
+
+            Graphics g = Graphics.FromImage(myBitmap);
+            Pen p = new Pen(Color.Red, 2);
+            Draw draw = new Draw(g, p, 10, numbers);
+        } 
 
         public String [] getCommand()
         {

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1585
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConorSE4", "ConorSE4\ConorSE4.csproj", "{050E7A9E-08CC-4A26-9602-4326E73649B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{A49C2E97-CD89-4044-95DE-D24A985B12A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{050E7A9E-08CC-4A26-9602-4326E73649B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{050E7A9E-08CC-4A26-9602-4326E73649B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{050E7A9E-08CC-4A26-9602-4326E73649B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A49C2E97-CD89-4044-95DE-D24A985B12A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A49C2E97-CD89-4044-95DE-D24A985B12A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A49C2E97-CD89-4044-95DE-D24A985B12A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A49C2E97-CD89-4044-95DE-D24A985B12A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

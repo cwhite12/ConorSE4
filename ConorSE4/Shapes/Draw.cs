@@ -1,47 +1,35 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.Windows.Forms;
 
-//namespace ConorSE4.Shapes
-//{
-//    class Draw
-//    {
-//        bool mouseDown = false;
-//        Bitmap myBitmap;
-//        public Form1()
-//        {
-//            myBitmap = new Bitmap(640, 480); //create off screen bitmap
-//            InitializeComponent();
-//        }
+namespace ConorSE4.Shapes
+{
+    class Draw
+    {
+        private Graphics g;
+        private Pen p;
+        private int x;
+        private int numbers;
+        private MouseEventArgs e;
 
-//        private void Form1_MouseDown(object sender, MouseEventArgs e)
-//        {
-//            mouseDown = true; //flag mouse button down
-//        }
+        public Draw(Graphics g,Pen p,Point firstPoint,Point drawTo)
+        {
+            g.DrawLine(p,firstPoint,drawTo);
+            p.Dispose();
 
-//        private void Form1_MouseUp(object sender, MouseEventArgs e)
-//        {
-//            mouseDown = false; //flag mouse button up
-//        }
+        }
 
-//        private void Form1_MouseMove(object sender, MouseEventArgs e)
-//        {
-//            if (mouseDown == false)
-//                return; //mouse not down so nothing to do
-//            Graphics g = Graphics.FromImage(myBitmap); //get graphics contex of off screen bitmap
-//            Pen p = new Pen(Color.Red, 2);
-//            g.DrawLine(p, e.X, e.Y, e.X + 1, e.Y + 1); //draw a point on off screen bitmap
-//            p.Dispose();
-//            Refresh(); //signify that something has been draw and windowing system should update the display
-//        }
-
-//        private void Form1_Paint(object sender, PaintEventArgs e)
-//        {
-//            Graphics g = e.Graphics; //get graphics context of form (which is being displayed)
-//            g.DrawImageUnscaled(myBitmap, 0, 0); //put the off screen bitmap on the form
-//        }
-//    }
-//}
-//}
+        public Draw(Graphics g, Pen p, int x, int numbers)
+        {
+            this.g = g;
+            this.p = p;
+            this.x = x;
+            this.numbers = numbers;
+          
+        }
+    }
+}
