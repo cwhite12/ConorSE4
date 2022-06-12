@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ConorSE4.Shapes
+namespace ConorSE4
 {
-    class Draw
+   public class Draw
     {
         private Graphics g;
         private Pen p;
