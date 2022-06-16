@@ -43,6 +43,7 @@ namespace ConorSE4
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.commandRunTextBox = new System.Windows.Forms.TextBox();
+            this.userCommandBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.runButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,12 +54,10 @@ namespace ConorSE4
             this.openFileButton = new System.Windows.Forms.Button();
             this.openFD = new System.Windows.Forms.OpenFileDialog();
             this.New = new System.Windows.Forms.Button();
-            this.commandSentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userCommandBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.userCommandBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayOfAction)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userCommandBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -129,8 +128,6 @@ namespace ConorSE4
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.commandSentDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.userCommandBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(378, 615);
             this.dataGridView1.Name = "dataGridView1";
@@ -186,17 +183,6 @@ namespace ConorSE4
             this.New.UseVisualStyleBackColor = true;
             this.New.Click += new System.EventHandler(this.New_Click);
             // 
-            // commandSentDataGridViewTextBoxColumn
-            // 
-            this.commandSentDataGridViewTextBoxColumn.DataPropertyName = "commandSent";
-            this.commandSentDataGridViewTextBoxColumn.HeaderText = "Command History";
-            this.commandSentDataGridViewTextBoxColumn.Name = "commandSentDataGridViewTextBoxColumn";
-            this.commandSentDataGridViewTextBoxColumn.Width = 105;
-            // 
-            // userCommandBindingSource
-            // 
-            this.userCommandBindingSource.DataSource = typeof(ConorSE4.UserCommand);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,10 +202,10 @@ namespace ConorSE4
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            ((System.ComponentModel.ISupportInitialize)(this.userCommandBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayOfAction)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userCommandBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

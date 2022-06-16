@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rectangle = ConorSE4.Shapes.Rectangle;
 
 namespace ConorSE4
 {
@@ -163,23 +164,27 @@ namespace ConorSE4
             }
             if (GetTextFromTextBox().Contains("circle"))
             {
-
-
-                new Circle(Color.Black, 123, 123, 123);
+                circle();
 
             }
             if (GetTextFromTextBox().Contains("drawTo")) {
 
                 draw();
-                
     
+            }
+            if(GetTextFromTextBox().Contains("rect"))
+            {
+                rectangle();
+            }
+            if (GetTextFromTextBox().Contains("square"))
+            {
+                square();
             }
 
 
         }
 
-        public void draw() {
-            MouseEventArgs e;
+        public void draw() { 
             String text = GetTextFromTextBox();
             int numbers = Int32.Parse(text);
             String letters = Regex.Replace(text, @"[\d0]", string.Empty);
@@ -188,6 +193,38 @@ namespace ConorSE4
             Pen p = new Pen(Color.Red, 2);
             Draw draw = new Draw(g, p, 10, numbers);
         } 
+        public void circle()
+        {
+            String text = GetTextFromTextBox();
+            int numbers = Int32.Parse(text);
+            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
+
+            Graphics g = Graphics.FromImage(myBitmap);
+            Pen p = new Pen(Color.Red, 2);
+            Circle circle = new Circle(Color.Red, 50, 50, numbers);
+        }
+        public void rectangle()
+        {
+   
+            String text = GetTextFromTextBox();
+            int numbers = Int32.Parse(text);
+            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
+
+            Graphics g = Graphics.FromImage(myBitmap);
+            Pen p = new Pen(Color.Red, 2);
+            Rectangle rectangle = new Rectangle(Color.Red, 50, 50, numbers, numbers);
+        }
+        public void square()
+        {
+            String text = GetTextFromTextBox();
+            int numbers = Int32.Parse(text);
+            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
+
+            Graphics g = Graphics.FromImage(myBitmap);
+            Pen p = new Pen(Color.Red, 2);
+            Square rectangle = new Square(Color.Red, 50, 50, numbers);
+        }
+    
 
         public String [] getCommand()
         {
