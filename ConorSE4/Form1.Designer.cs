@@ -28,8 +28,8 @@ namespace ConorSE4
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.BindingSource userCommandBindingSource;
-        private ErrorProvider errorProvider;
+        //private System.Windows.Forms.BindingSource userCommandBindingSource;
+        public ErrorProvider errorProvider;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn commandSentDataGridViewTextBoxColumn;
         private PictureBox displayOfAction;
@@ -43,7 +43,6 @@ namespace ConorSE4
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.commandRunTextBox = new System.Windows.Forms.TextBox();
-            this.userCommandBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.runButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,7 +53,7 @@ namespace ConorSE4
             this.openFileButton = new System.Windows.Forms.Button();
             this.openFD = new System.Windows.Forms.OpenFileDialog();
             this.New = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.userCommandBindingSource)).BeginInit();
+            this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayOfAction)).BeginInit();
@@ -77,7 +76,6 @@ namespace ConorSE4
             // 
             this.commandRunTextBox.AcceptsReturn = true;
             this.commandRunTextBox.AcceptsTab = true;
-            this.commandRunTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userCommandBindingSource, "commandSent", true));
             this.commandRunTextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.commandRunTextBox.Location = new System.Drawing.Point(12, 574);
             this.commandRunTextBox.Name = "commandRunTextBox";
@@ -111,7 +109,7 @@ namespace ConorSE4
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(47, 138);
+            this.label2.Location = new System.Drawing.Point(54, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(400, 342);
             this.label2.TabIndex = 9;
@@ -120,15 +118,12 @@ namespace ConorSE4
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
-            this.errorProvider.DataSource = this.userCommandBindingSource;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.DataSource = this.userCommandBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(378, 615);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(146, 164);
@@ -183,11 +178,22 @@ namespace ConorSE4
             this.New.UseVisualStyleBackColor = true;
             this.New.Click += new System.EventHandler(this.New_Click);
             // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(150, 0);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 16;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 791);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.New);
             this.Controls.Add(this.openFileButton);
             this.Controls.Add(this.button3);
@@ -202,7 +208,6 @@ namespace ConorSE4
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            ((System.ComponentModel.ISupportInitialize)(this.userCommandBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.displayOfAction)).EndInit();
@@ -217,6 +222,7 @@ namespace ConorSE4
         private Button openFileButton;
         private OpenFileDialog openFD;
         private Button New;
+        private Button saveButton;
     }
 }
 

@@ -21,7 +21,7 @@ namespace ConorSE4
         String var;
         bool mouseDown = false;
         Bitmap myBitmap;
-
+        //    ParseCommand parseCommand = new ParseCommand();
         private bool button1WasClicked = false;
         /// <summary>
         /// Form1 constructor that creates a new bitmap and initializes component
@@ -64,11 +64,39 @@ namespace ConorSE4
             if (mouseDown == false)
                 return;
             Graphics g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.Red, 2);
+            Color color = setColour();
+            Pen p = new Pen(color, 2);
             g.DrawLine(p, e.X, e.Y, e.X + 1, e.Y + 1);
+
             p.Dispose();
             Refresh();
         }
+
+        /// <summary>
+        /// method that sets the colour using user input
+        /// </summary>
+        public Color setColour()
+        {
+
+            ParseCommand parseCommand = new ParseCommand();
+            if (parseCommand.getCommand(commandRunTextBox).Contains("red"))
+            {
+                return Color.Red;
+            }
+            if (parseCommand.getCommand(commandRunTextBox).Contains("green"))
+            {
+                return Color.Green;
+            }
+            if (parseCommand.getCommand(commandRunTextBox).Contains("blue"))
+            {
+                return Color.Blue;
+            }
+            return Color.Red;
+        }
+    
+        
+
+      
         private void displayOfAction_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false; //flag mouse button up
@@ -104,27 +132,20 @@ namespace ConorSE4
 
 
         }
-        public void checkSyntax(String text)
-        {
+    
+        ///// <summary>
+        ///// Gets the user input entered into the textbox
+        ///// </summary>
+        ///// <returns>returns the var value of the user input</returns>
+        //public String GetTextFromTextBox()
+        //{
 
-            var = commandRunTextBox.Text;
+        //    var = commandRunTextBox.Text;
+        //    //   MessageBox.Show(var);
 
+        //    return var;
 
-        }
-
-        /// <summary>
-        /// Gets the user input entered into the textbox
-        /// </summary>
-        /// <returns>returns the var value of the user input</returns>
-        public String GetTextFromTextBox()
-        {
-
-            var = commandRunTextBox.Text;
-            //   MessageBox.Show(var);
-
-            return var;
-
-        }
+        //}
 
         private void progressBar1_Click(object sender, EventArgs e)
         {
@@ -137,19 +158,21 @@ namespace ConorSE4
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            GetTextFromTextBox();
+            ParseCommand parseCommand = new ParseCommand();
+           
+            parseCommand.GetTextFromTextBox(commandRunTextBox);
             //   button1WasClicked = true;
-            userCommandBindingSource.EndEdit();
-            UserCommand userCommand = userCommandBindingSource.Current as UserCommand;
-            userCommandBindingSource.AddNew();
+            //userCommandBindingSource.EndEdit();
+            //UserCommand userCommand = userCommandBindingSource.Current as UserCommand;
+            //userCommandBindingSource.AddNew();
 
-            if (userCommand != null)
+            //if (userCommand != null)
 
-            {
-                if (userCommand.isValid)
-                {
+            //{
+            //    if (userCommand.isValid)
+            //    {
 
-                }
+            //    }
 
 
                 //ValidationContext context = new ValidationContext(userCommand, null, null);
@@ -161,89 +184,30 @@ namespace ConorSE4
                 //        MessageBox.Show(result.ErrorMessage, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //        return;
                 //    }
-            }
-            if (GetTextFromTextBox().Contains("circle"))
+            
+            if (parseCommand.GetTextFromTextBox(commandRunTextBox).Contains("circle"))
             {
-                circle();
+                parseCommand.circle(commandRunTextBox,myBitmap);
 
             }
-            if (GetTextFromTextBox().Contains("drawTo")) {
+            if (parseCommand.GetTextFromTextBox(commandRunTextBox).Contains("drawTo")) {
 
-                draw();
+                parseCommand.draw(commandRunTextBox, myBitmap);
+
+            }
+            if(parseCommand.GetTextFromTextBox(commandRunTextBox).Contains("rect"))
+            {
+                parseCommand.rectangle(commandRunTextBox, myBitmap);
+            }
+            if (parseCommand.GetTextFromTextBox(commandRunTextBox).Contains("square"))
+            {
+                parseCommand.square(commandRunTextBox, myBitmap);
+            }
+
+
+        }
+
     
-            }
-            if(GetTextFromTextBox().Contains("rect"))
-            {
-                rectangle();
-            }
-            if (GetTextFromTextBox().Contains("square"))
-            {
-                square();
-            }
-
-
-        }
-
-        public void draw() { 
-            String text = GetTextFromTextBox();
-            int numbers = Int32.Parse(text);
-            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
-
-            Graphics g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.Red, 2);
-            Draw draw = new Draw(g, p, 10, numbers);
-        } 
-        public void circle()
-        {
-            String text = GetTextFromTextBox();
-            int numbers = Int32.Parse(text);
-            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
-
-            Graphics g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.Red, 2);
-            Circle circle = new Circle(Color.Red, 50, 50, numbers);
-        }
-        public void rectangle()
-        {
-   
-            String text = GetTextFromTextBox();
-            int numbers = Int32.Parse(text);
-            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
-
-            Graphics g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.Red, 2);
-            Rectangle rectangle = new Rectangle(Color.Red, 50, 50, numbers, numbers);
-        }
-        public void square()
-        {
-            String text = GetTextFromTextBox();
-            int numbers = Int32.Parse(text);
-            String letters = Regex.Replace(text, @"[\d0]", string.Empty);
-
-            Graphics g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.Red, 2);
-            Square rectangle = new Square(Color.Red, 50, 50, numbers);
-        }
-    
-
-        public String [] getCommand()
-        {
-         String userEnteredText = GetTextFromTextBox();
-            string wordCommand;
-            string numbersCommand = (" ");
-
-
-            wordCommand = GetTextFromTextBox();
-            numbersCommand = wordCommand;
-
-
-            string[] split = numbersCommand.Split(' ');
-            foreach (string item in split)
-            {
-               item.ToString();
-            }
-            return split;
-        }
 
         public void sendCommand()
         {
@@ -282,48 +246,12 @@ namespace ConorSE4
 
         private void syntaxButton_Click(object sender, EventArgs e)
         {
-            validateSyntax();
+            ParseCommand parseCommand = new ParseCommand();
+            parseCommand.validateSyntax(commandRunTextBox);
         }
      
     
-        /// <summary>
-        /// method that is used by the syntax button to check if user input is valid syntax
-        /// </summary>
-        /// <returns>a boolean that determines if the syntax is valid</returns>
-        public bool validateSyntax()
-        {
-            String[] allowedValues = { "drawTo", "rect", "circle" };
-
-            String textFromTextBox = commandRunTextBox.Text;
-            bool doesItContainValidSyntax = ContainsAny(textFromTextBox, allowedValues);
-            if (doesItContainValidSyntax)
-            {
-                errorProvider.SetError(commandRunTextBox, "");
-            }
-            else
-                errorProvider.SetError(commandRunTextBox, "please enter valid syntax");
-            // throw new Exceptions.SyntaxNotValidException("Syntax is not valid");
-
-            return doesItContainValidSyntax;
-
-        }
-
-        /// <summary>
-        /// A method to check if any of the values in the text boxt text are in the array of allowed values
-        /// </summary>
-        /// <param name="textBoxText">the text entered from the user</param>
-        /// <param name="allowedValues">an array list of the allowed values</param>
-        /// <returns>a boolean if it contains any</returns>
-        public static bool ContainsAny(string textBoxText, params string[] allowedValues)
-        {
-            foreach (string allowed in allowedValues)
-            {
-                if (textBoxText.Contains(allowed))
-                    return true;
-            }
-
-            return false;
-        }
+     
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -353,6 +281,9 @@ namespace ConorSE4
         {
             ClearImage();
         }
+        /// <summary>
+        /// clears the image on picturebox
+        /// </summary>
         public void ClearImage()
         {
             Graphics g = Graphics.FromImage(myBitmap);
@@ -391,6 +322,22 @@ namespace ConorSE4
         {
             label2.Text = "";
             MessageBox.Show("Script Box Cleared");
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+
+            SaveFileDialog saveFile = new SaveFileDialog();
+
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = saveFile.FileName;
+
+            }
+            else
+            {
+                MessageBox.Show("Operation Cancelled");
+            }
         }
     }
 }
